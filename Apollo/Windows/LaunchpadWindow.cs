@@ -45,7 +45,7 @@ namespace Apollo.Windows {
         public LaunchpadWindow(Launchpad launchpad) {
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
             
             UpdateTopmost(Preferences.AlwaysOnTop);

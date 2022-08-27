@@ -33,11 +33,11 @@ namespace Apollo.Components {
         bool mouseHeld = false;
 
         protected void MouseEnter(object sender, PointerEventArgs e) {
-            Fill = (IBrush)Application.Current.Styles.FindResource(mouseHeld? "ThemeButtonDownBrush" : "ThemeButtonOverBrush");
+            Fill = (IBrush)Application.Current.FindResource(mouseHeld? "ThemeButtonDownBrush" : "ThemeButtonOverBrush");
         }
 
         protected void MouseLeave(object sender, PointerEventArgs e) {
-            Fill = (IBrush)Application.Current.Styles.FindResource("ThemeButtonEnabledBrush");
+            Fill = (IBrush)Application.Current.FindResource("ThemeButtonEnabledBrush");
             mouseHeld = false;
         }
 
@@ -47,7 +47,7 @@ namespace Apollo.Components {
             if (MouseButton == PointerUpdateKind.LeftButtonPressed || (AllowRightClick && MouseButton == PointerUpdateKind.RightButtonPressed)) {
                 mouseHeld = true;
 
-                Fill = (IBrush)Application.Current.Styles.FindResource("ThemeButtonDownBrush");
+                Fill = (IBrush)Application.Current.FindResource("ThemeButtonDownBrush");
             }
         }
 

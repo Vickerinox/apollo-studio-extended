@@ -315,7 +315,7 @@ namespace Apollo.Components {
 
             Arc.StrokeThickness = stroke * _scale;
             if (!overrideBase) {
-                Arc.Stroke = (IBrush)Application.Current.Styles.FindResource(Enabled? color : "ThemeForegroundLowBrush");
+                Arc.Stroke = (IBrush)Application.Current.FindResource(Enabled? color : "ThemeForegroundLowBrush");
                 Display.Text = (Enabled || !DisplayDisabledText)? ValueString : DisabledText;
             }
             
@@ -464,9 +464,9 @@ namespace Apollo.Components {
             if (double.TryParse(text, out double value)) {
                 if (Minimum <= value && value <= Maximum) {
                     RawValue = value;
-                    Input_Update = () => { Input.Foreground = (IBrush)Application.Current.Styles.FindResource("ThemeForegroundBrush"); };
+                    Input_Update = () => { Input.Foreground = (IBrush)Application.Current.FindResource("ThemeForegroundBrush"); };
                 } else {
-                    Input_Update = () => { Input.Foreground = (IBrush)Application.Current.Styles.FindResource("ErrorBrush"); };
+                    Input_Update = () => { Input.Foreground = (IBrush)Application.Current.FindResource("ErrorBrush"); };
                 }
 
                 Input_Update += () => {

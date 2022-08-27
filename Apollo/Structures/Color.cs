@@ -166,7 +166,7 @@ namespace Apollo.Structures {
 
             double max = new double[] {fr, fg, fb}.Max() / 255;
 
-            AvaloniaColor bg = (AvaloniaColor)Application.Current.Styles.FindResource("ThemeForegroundLowColor");
+            AvaloniaColor bg = (AvaloniaColor)Application.Current.FindResource("ThemeForegroundLowColor");
 
             return new SolidColorBrush(new AvaloniaColor(
                 255,

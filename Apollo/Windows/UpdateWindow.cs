@@ -19,7 +19,7 @@ using Apollo.Helpers;
 
 namespace Apollo.Windows {
     public class UpdateWindow: Window {
-        static Image UpdateImage = (Image)Application.Current.Styles.FindResource("UpdateImage");
+        static Image UpdateImage = (Image)Application.Current.FindResource("UpdateImage");
 
         void InitializeComponent() {
             AvaloniaXamlLoader.Load(this);
@@ -70,7 +70,7 @@ namespace Apollo.Windows {
 
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
             
             Root.Children.Add(UpdateImage);

@@ -29,7 +29,7 @@ namespace Apollo.Viewers {
         }
 
         protected override void ApplyHeaderBrush(string resource) {
-            IBrush brush = (IBrush)Application.Current.Styles.FindResource(resource);
+            IBrush brush = (IBrush)Application.Current.FindResource(resource);
 
             if (IsArrangeValid) Header.Background = brush;
             else this.Resources["TitleBrush"] = brush;
@@ -67,8 +67,8 @@ namespace Apollo.Viewers {
         }
 
         public override void SetEnabled() {
-            Header.BorderBrush = (IBrush)Application.Current.Styles.FindResource(_device.Enabled? "ThemeBorderMidBrush" : "ThemeBorderLowBrush");
-            TitleText.Foreground = (IBrush)Application.Current.Styles.FindResource(_device.Enabled? "ThemeForegroundBrush" : "ThemeForegroundLowBrush");
+            Header.BorderBrush = (IBrush)Application.Current.FindResource(_device.Enabled? "ThemeBorderMidBrush" : "ThemeBorderLowBrush");
+            TitleText.Foreground = (IBrush)Application.Current.FindResource(_device.Enabled? "ThemeForegroundBrush" : "ThemeForegroundLowBrush");
         }
     }
 }

@@ -42,3 +42,4 @@ mkdir Dist
 "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /q Publish\Apollo.iss
 
 echo Done.
+pause

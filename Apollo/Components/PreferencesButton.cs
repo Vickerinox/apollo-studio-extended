@@ -33,7 +33,7 @@ namespace Apollo.Components {
 
             base.MouseLeave(this, null);
 
-            Hole.Fill = (SolidColorBrush)Application.Current.Styles.FindResource("ThemeBorderMidBrush");
+            Hole.Fill = (SolidColorBrush)Application.Current.FindResource("ThemeBorderMidBrush");
         }
 
         protected override void Click(PointerReleasedEventArgs e) => PreferencesWindow.Create((Window)this.GetVisualRoot());

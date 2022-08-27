@@ -45,7 +45,7 @@ namespace Apollo.Components {
         }
 
         public void Select() {
-            ApplyHeaderBrush((IBrush)Application.Current.Styles.FindResource("ThemeAccentBrush2"));
+            ApplyHeaderBrush((IBrush)Application.Current.FindResource("ThemeAccentBrush2"));
             Selected = true;
         }
 

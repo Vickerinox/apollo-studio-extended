@@ -142,7 +142,7 @@ namespace Apollo.Windows {
         public PreferencesWindow() {
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
             
             UpdateTopmost(Preferences.AlwaysOnTop);
@@ -397,19 +397,19 @@ namespace Apollo.Windows {
         
         void Minimize() => WindowState = WindowState.Minimized;
 
+        //Function that will spawn a preferences window. NOT FUNCTIONAL? 
         public static void Create(Window owner) {
             if (Preferences.Window == null) {
+                Program.Log("opening null window... (expect crash)");
                 Preferences.Window = new PreferencesWindow();
-                
                 if (owner == null || owner.WindowState == WindowState.Minimized)
                     Preferences.Window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 else
                     Preferences.Window.Owner = owner;
-
                 Preferences.Window.Show();
                 Preferences.Window.Owner = null;
-
             } else {
+                Program.Log("opening normal window...");
                 Preferences.Window.WindowState = WindowState.Normal;
                 Preferences.Window.Activate();
             }

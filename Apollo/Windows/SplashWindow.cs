@@ -25,7 +25,7 @@ using Apollo.Viewers;
 
 namespace Apollo.Windows {
     public class SplashWindow: Window {
-        static Image SplashImage = (Image)Application.Current.Styles.FindResource("SplashImage");
+        static Image SplashImage = (Image)Application.Current.FindResource("SplashImage");
 
         void InitializeComponent() {
             AvaloniaXamlLoader.Load(this);
@@ -95,7 +95,7 @@ namespace Apollo.Windows {
         public SplashWindow() {
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
             
             UpdateTopmost(Preferences.AlwaysOnTop);

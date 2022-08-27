@@ -26,7 +26,7 @@ namespace Apollo.Windows {
         public MessageWindow(string message, string[] options = null) {
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
             
             if (Owner == null) WindowStartupLocation = WindowStartupLocation.CenterScreen;

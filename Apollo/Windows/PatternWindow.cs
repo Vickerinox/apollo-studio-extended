@@ -239,7 +239,7 @@ namespace Apollo.Windows {
         public PatternWindow(Pattern pattern) {
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
 
             UpdateTopmost(Preferences.AlwaysOnTop);
@@ -887,7 +887,7 @@ namespace Apollo.Windows {
 
             if (index != null) RootKey.SetColor(
                 LaunchpadGrid.SignalToGrid(index.Value),
-                (SolidColorBrush)Application.Current.Styles.FindResource("ThemeAccentBrush")
+                (SolidColorBrush)Application.Current.FindResource("ThemeAccentBrush")
             );
         }
 

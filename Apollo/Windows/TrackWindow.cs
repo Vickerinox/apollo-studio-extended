@@ -21,7 +21,7 @@ namespace Apollo.Windows {
     public class TrackWindow: Window {
         void InitializeComponent() {
             AvaloniaXamlLoader.Load(this);
-
+            Program.Log("TrackWindow: Opened");
             TitleText = this.Get<TextBlock>("Title");
             TitleCenter = this.Get<TextBlock>("TitleCenter");
 
@@ -61,7 +61,7 @@ namespace Apollo.Windows {
         public TrackWindow(Track track) {
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
 
             UpdateTopmost(Preferences.AlwaysOnTop);
@@ -129,7 +129,7 @@ namespace Apollo.Windows {
             TitleCenter.Opacity = 1 - result;
         }
 
-        public virtual void SetEnabled() => Background = (IBrush)Application.Current.Styles.FindResource(_track.Enabled? "ThemeControlMidBrush" : "ThemeControlLowBrush");
+        public virtual void SetEnabled() => Background = (IBrush)Application.Current.FindResource(_track.Enabled? "ThemeControlMidBrush" : "ThemeControlLowBrush");
 
         void Track_Scroll(object sender, PointerWheelEventArgs e) => Contents.Offset = Contents.Offset.WithX(Contents.Offset.X - e.Delta.Y * 20);
 
@@ -264,6 +264,7 @@ namespace Apollo.Windows {
 
         public static void Create(Track track, Window owner) {
             if (track.Window == null) {
+                Program.Log("trying to create trackwindow...");
                 track.Window = new TrackWindow(track);
                 
                 if (owner == null || owner.WindowState == WindowState.Minimized) 

@@ -107,7 +107,7 @@ namespace Apollo.Windows {
         public ProjectWindow() {
             InitializeComponent();
             #if DEBUG
-                this.AttachDevTools();
+                //this.AttachDevTools();
             #endif
             
             UpdateTopmost(Preferences.AlwaysOnTop);
@@ -262,9 +262,9 @@ namespace Apollo.Windows {
                     Program.Project.BPM = value;
                     BPM_Ignore = false;
                     
-                    BPM_Update = () => { BPM.Foreground = (IBrush)Application.Current.Styles.FindResource("ThemeForegroundBrush"); };
+                    BPM_Update = () => { BPM.Foreground = (IBrush)Application.Current.FindResource("ThemeForegroundBrush"); };
                 } else {
-                    BPM_Update = () => { BPM.Foreground = (IBrush)Application.Current.Styles.FindResource("ErrorBrush"); };
+                    BPM_Update = () => { BPM.Foreground = (IBrush)Application.Current.FindResource("ErrorBrush"); };
                 }
 
                 BPM_Update += () => { 
@@ -273,7 +273,7 @@ namespace Apollo.Windows {
 
                     if (value > 999) {
                         text = "999";
-                        BPM.Foreground = (IBrush)Application.Current.Styles.FindResource("ThemeForegroundBrush");
+                        BPM.Foreground = (IBrush)Application.Current.FindResource("ThemeForegroundBrush");
                     }
                     
                     BPM.Text = text;
@@ -396,23 +396,26 @@ namespace Apollo.Windows {
 
         public static void Create(Window owner) {
             if (Program.Project.Window == null) {
+                Program.Log("Trying to open project window...");
                 Program.Project.Window = new ProjectWindow();
                 
-                if (owner == null || owner.WindowState == WindowState.Minimized) 
+                if (owner == null || owner.WindowState == WindowState.Minimized) {
+                    Program.Log("owner shenanigans"); 
                     Program.Project.Window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                else
+                } else
                     Program.Project.Window.Owner = owner;
 
                 Program.Project.Window.Show();
                 Program.Project.Window.Owner = null;
 
             } else {
+                Program.Log("Trying to reopen project window...");
                 Program.Project.Window.WindowState = WindowState.Normal;
                 Program.Project.Window.Activate();
             }
 
             Program.Project.Window.Topmost = true;
-            Program.Project.Window.Topmost = Preferences.AlwaysOnTop;
+            //Program.Project.Window.Topmost = Preferences.AlwaysOnTop;
         }
 
         void Track_Action(string action) => Track_Action(action, false);

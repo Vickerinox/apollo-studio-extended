@@ -181,7 +181,8 @@ namespace Apollo.Core {
                     if (device.GetType() == typeof(Launchpad) && device.Available)
                         Disconnect(device);
 
-                Program.Log($"Rescan");
+                //annoying rescan looking for new midi devices.
+                //Program.Log($"Rescan");
 
                 if (updated) Update();
             }

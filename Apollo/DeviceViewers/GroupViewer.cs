@@ -118,7 +118,7 @@ namespace Apollo.DeviceViewers {
         }
 
         public void Expand(int? index) {
-            if (_group.Expanded != null) {
+            if (_group.Expanded != null) { 
                 Expand_Remove();
 
                 if (index == _group.Expanded) {
