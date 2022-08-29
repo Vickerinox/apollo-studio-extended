@@ -75,6 +75,7 @@ namespace Apollo.Core {
         });
 
         public override void Initialize() {
+            Program.Log("Starting? maybe?");
             AvaloniaXamlLoader.Load(this);
 
             instance = this;

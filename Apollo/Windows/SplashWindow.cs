@@ -258,7 +258,7 @@ namespace Apollo.Windows {
                 },
                 Title = "Open Project"
             };
-
+            Program.Log("Start of program? hopefully?");
             string[] result = await ofd.ShowAsync(this);
 
             if (result.Length > 0)
@@ -356,6 +356,7 @@ namespace Apollo.Windows {
         void Minimize() => WindowState = WindowState.Minimized;
 
         public static void Create(Window owner) {
+            Program.Log("splash spawned");
             SplashWindow window = new SplashWindow();
         
             if (owner == null || owner.WindowState != WindowState.Minimized) {

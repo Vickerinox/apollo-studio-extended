@@ -80,6 +80,7 @@ namespace Apollo.Windows {
         void Close(object sender, RoutedEventArgs e) => Close();
 
         public static async Task<string> Create(string message, string[] options, Window owner) {
+            Program.Log("MessageWindow spawn");
             MessageWindow window = new MessageWindow(message, options);
             
             if (owner == null || owner.WindowState == WindowState.Minimized)

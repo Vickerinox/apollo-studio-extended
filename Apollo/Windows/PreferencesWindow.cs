@@ -32,46 +32,46 @@ namespace Apollo.Windows {
 
             AlwaysOnTop = this.Get<CheckBox>("AlwaysOnTop");
             CenterTrackContents = this.Get<CheckBox>("CenterTrackContents");
-
+//
             ChainSignalIndicators = this.Get<CheckBox>("ChainSignalIndicators");
             DeviceSignalIndicators = this.Get<CheckBox>("DeviceSignalIndicators");
             
             ColorDisplayFormat = this.Get<ComboBox>("ColorDisplayFormat");
-
+  //
             LaunchpadStyle = this.Get<ComboBox>("LaunchpadStyle");
             LaunchpadGridRotation = this.Get<ComboBox>("LaunchpadGridRotation");
             LaunchpadModel = this.Get<ComboBox>("LaunchpadModel");
-
+  //
             AutoCreateKeyFilter = this.Get<CheckBox>("AutoCreateKeyFilter");
             AutoCreateMacroFilter = this.Get<CheckBox>("AutoCreateMacroFilter");
             AutoCreatePattern = this.Get<CheckBox>("AutoCreatePattern");
-
+  //
             FPSLimit = this.Get<HorizontalDial>("FPSLimit");
             FPSLimit.ErrorText = $"Use values above {FPSLimit.ErrorValue} FPS with caution, as they usually\n" +
                                  "bring little noticable improvement while severely limiting\n" +
                                  "performance (especially on non-CFW Launchpads).";
-
+  //
             CopyPreviousFrame = this.Get<CheckBox>("CopyPreviousFrame");
             CaptureLaunchpad = this.Get<CheckBox>("CaptureLaunchpad");
             EnableGestures = this.Get<CheckBox>("EnableGestures");
             RememberPatternPosition = this.Get<CheckBox>("RememberPatternPosition");
-
+  //
             Monochrome = this.Get<RadioButton>("Monochrome");
             NovationPalette = this.Get<RadioButton>("NovationPalette");
             CustomPalette = this.Get<RadioButton>("CustomPalette");
-
+  //
             ThemeHeader = this.Get<TextBlock>("ThemeHeader");
             Dark = this.Get<RadioButton>("Dark");
             Light = this.Get<RadioButton>("Light");
-
+  //
             Backup = this.Get<CheckBox>("Backup");
             Autosave = this.Get<CheckBox>("Autosave");
-
+  //
             UndoLimit = this.Get<CheckBox>("UndoLimit");
-
+//
             DiscordPresence = this.Get<CheckBox>("DiscordPresence");
             DiscordFilename = this.Get<CheckBox>("DiscordFilename");
-
+//
             CheckForUpdates = this.Get<CheckBox>("CheckForUpdates");
 
             Contents = this.Get<StackPanel>("Contents").Children;
@@ -123,10 +123,10 @@ namespace Apollo.Windows {
         void UpdateTopmost(bool value) => AlwaysOnTop.IsChecked = Topmost = value;
 
         void UpdatePorts() {
-            for (int i = Contents.Count - 2; i >= 0; i--) Contents.RemoveAt(i);
+          for (int i = Contents.Count - 2; i >= 0; i--) Contents.RemoveAt(i);
 
-            foreach (Launchpad lp in MIDI.UsableDevices)
-                Contents.Insert(Contents.Count - 1, new LaunchpadInfo(lp));
+          foreach (Launchpad lp in MIDI.UsableDevices)
+              Contents.Insert(Contents.Count - 1, new LaunchpadInfo(lp));
         }
 
         void HandlePorts() => Dispatcher.UIThread.InvokeAsync((Action)UpdatePorts);
@@ -147,59 +147,59 @@ namespace Apollo.Windows {
             
             UpdateTopmost(Preferences.AlwaysOnTop);
             Preferences.AlwaysOnTopChanged += UpdateTopmost;
-
+//
             Preferences.Window = this;
-
+//
             TextBlock Version = this.Get<TextBlock>("Version");
             Version.Text += Program.Version;
-
+//
             if (Github.AvaloniaVersion() != "")
                 ToolTip.SetTip(Version, $"Avalonia {Github.AvaloniaVersion()}");
-
+//
             ToolTip.SetTip(this.Get<TextBlock>("LaunchpadHeader"), $"RtMidi APIs:\n{string.Join("- \n", MidiDeviceManager.Default.GetAvailableMidiApis())}");
-
+//
             fade.MIDIExit = FadeExit;
             fade.Initialize();
-
+//
             AlwaysOnTop.IsChecked = Preferences.AlwaysOnTop;
             CenterTrackContents.IsChecked = Preferences.CenterTrackContents;
-
+////
             ChainSignalIndicators.IsChecked = Preferences.ChainSignalIndicators;
             DeviceSignalIndicators.IsChecked = Preferences.DeviceSignalIndicators;
             
             ColorDisplayFormat.SelectedIndex = (int)Preferences.ColorDisplayFormat;
-
+////
             LaunchpadStyle.SelectedIndex = (int)Preferences.LaunchpadStyle;
             LaunchpadGridRotation.SelectedIndex = Convert.ToInt32(Preferences.LaunchpadGridRotation);
             LaunchpadModel.SelectedIndex = (int)Preferences.LaunchpadModel;
-
+////
             AutoCreateKeyFilter.IsChecked = Preferences.AutoCreateKeyFilter;
             AutoCreateMacroFilter.IsChecked = Preferences.AutoCreateMacroFilter;
             AutoCreatePattern.IsChecked = Preferences.AutoCreatePattern;
-
+////
             FPSLimit.RawValue = Preferences.FPSLimit;
-
+////
             CopyPreviousFrame.IsChecked = Preferences.CopyPreviousFrame;
             CaptureLaunchpad.IsChecked = Preferences.CaptureLaunchpad;
             EnableGestures.IsChecked = Preferences.EnableGestures;
             RememberPatternPosition.IsChecked = Preferences.RememberPatternPosition;
-
+////
             Monochrome.IsChecked = Preferences.ImportPalette == Palettes.Monochrome;
             NovationPalette.IsChecked = Preferences.ImportPalette == Palettes.NovationPalette;
             CustomPalette.Content = $"Custom Retina Palette - {Preferences.PaletteName}";
             CustomPalette.IsChecked = Preferences.ImportPalette == Palettes.CustomPalette;
-
+////
             Dark.IsChecked = Preferences.Theme == ThemeType.Dark;
             Light.IsChecked = Preferences.Theme == ThemeType.Light;
-
+////
             Backup.IsChecked = Preferences.Backup;
             Autosave.IsChecked = Preferences.Autosave;
-
+////
             UndoLimit.IsChecked = Preferences.UndoLimit;
-
+////
             DiscordPresence.IsChecked = Preferences.DiscordPresence;
             DiscordFilename.IsChecked = Preferences.DiscordFilename;
-
+////
             CheckForUpdates.IsChecked = Preferences.CheckForUpdates;
 
 #if !PRERELEASE
@@ -221,7 +221,6 @@ namespace Apollo.Windows {
             };
             Timer.Tick += UpdateTime;
             Timer.Start();
-
             UpdatePorts();
             MIDI.DevicesUpdated += HandlePorts;
         }
@@ -397,25 +396,25 @@ namespace Apollo.Windows {
         
         void Minimize() => WindowState = WindowState.Minimized;
 
-        //Function that will spawn a preferences window. NOT FUNCTIONAL? 
+        //Function that will spawn a preferences window. FUNCTIONAL!!!! DIAL CAUSES CRASH!!!
         public static void Create(Window owner) {
-            if (Preferences.Window == null) {
-                Program.Log("opening null window... (expect crash)");
-                Preferences.Window = new PreferencesWindow();
-                if (owner == null || owner.WindowState == WindowState.Minimized)
+            Program.Log("PreferencesWindow: Opened");   //basic logging
+            if (Preferences.Window == null) {           //create the window if its not in memory
+
+                Preferences.Window = new PreferencesWindow();   //make the window 
+                if (owner == null || owner.WindowState == WindowState.Minimized)    
                     Preferences.Window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 else
-                    Preferences.Window.Owner = owner;
-                Preferences.Window.Show();
-                Preferences.Window.Owner = null;
+                    Preferences.Window.Owner = owner;   
+                Preferences.Window.Show();              //Actually spawn/show the window on your pc
+                Preferences.Window.Owner = null;        //Remove parenting to main application
             } else {
-                Program.Log("opening normal window...");
-                Preferences.Window.WindowState = WindowState.Normal;
-                Preferences.Window.Activate();
+                Preferences.Window.WindowState = WindowState.Normal; //make the window not minimized lol
+                Preferences.Window.Activate();  //If there was already a preferences window in the background, just open it up instead of spawning another
             }
 
-            Preferences.Window.Topmost = true;
-            Preferences.Window.Topmost = Preferences.AlwaysOnTop;
+            Preferences.Window.Topmost = true;  //set topmost to not null
+            Preferences.Window.Topmost = Preferences.AlwaysOnTop; //set topmost according to preferences
         }
     }
 }

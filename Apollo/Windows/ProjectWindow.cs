@@ -69,10 +69,11 @@ namespace Apollo.Windows {
         void UpdateTitle() => Title = TitleText.Text = TitleCenter.Text = (Program.Project.FilePath == "")? "New Project" : Program.Project.FileName;
 
         void UpdateMacro() {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++){ 
                 ((Dial)MacroDials.Children[i]).RawValue = Program.Project.GetMacro(i + 1);
+            }
         }
-        
+
         void HandleMacro() => Dispatcher.UIThread.InvokeAsync((Action)UpdateMacro);
 
         void UpdateTopmost(bool value) => Topmost = value;
@@ -145,13 +146,14 @@ namespace Apollo.Windows {
             observables.Add(CenteringLeft.GetObservable(Visual.BoundsProperty).Subscribe(Bounds_Updated));
             observables.Add(CenteringRight.GetObservable(Visual.BoundsProperty).Subscribe(Bounds_Updated));
         }
-        
+
+        //Called when project is loaded (i assume?)
         void Loaded(object sender, EventArgs e) {
             Position = new PixelPoint(Position.X, Math.Max(0, Position.Y));
             
             Program.Project.PathChanged += UpdateTitle;
             UpdateTitle();
-
+            
             Program.Project.MacroChanged += HandleMacro;
             UpdateMacro();
         }
@@ -236,6 +238,7 @@ namespace Apollo.Windows {
                 this.Focus();
         }
 
+        //called by macro whenever a macro dials "Valuechanged" event occurs, updates all macros.
         void Macro_Changed(Dial sender, double value, double? old){
           Program.Project.SetMacro(MacroDials.Children.IndexOf(sender) + 1, (int)value);
         }
@@ -394,28 +397,25 @@ namespace Apollo.Windows {
 
         void ResizeSouth(object sender, PointerPressedEventArgs e) => BeginResizeDrag(WindowEdge.South, e);
 
-        public static void Create(Window owner) {
+        public static void Create(Window owner) {       
+            Program.Log("ProjectWindow: Opened");
             if (Program.Project.Window == null) {
-                Program.Log("Trying to open project window...");
+
                 Program.Project.Window = new ProjectWindow();
                 
                 if (owner == null || owner.WindowState == WindowState.Minimized) {
-                    Program.Log("owner shenanigans"); 
                     Program.Project.Window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 } else
                     Program.Project.Window.Owner = owner;
-
                 Program.Project.Window.Show();
                 Program.Project.Window.Owner = null;
-
             } else {
-                Program.Log("Trying to reopen project window...");
                 Program.Project.Window.WindowState = WindowState.Normal;
                 Program.Project.Window.Activate();
             }
 
             Program.Project.Window.Topmost = true;
-            //Program.Project.Window.Topmost = Preferences.AlwaysOnTop;
+            Program.Project.Window.Topmost = Preferences.AlwaysOnTop;
         }
 
         void Track_Action(string action) => Track_Action(action, false);

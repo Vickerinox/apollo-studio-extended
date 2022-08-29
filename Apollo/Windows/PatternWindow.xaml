@@ -70,16 +70,21 @@
                 <Border BorderBrush="{DynamicResource ThemeBorderHighBrush}" BorderThickness="0 0 0 1" Margin="20 0">
                   <Components:CollapseButton Margin="0 0 0 7" HorizontalAlignment="Center" x:Name="CollapseButton" Clicked="BottomCollapse" />
                 </Border>
-
+                 <!--> HERE IS WHERE THE LEFT PANEL IS</-->
                 <StackPanel Classes="collapseAnimation" x:Name="BottomLeftPane" HorizontalAlignment="Stretch" Spacing="5">
-                  <StackPanel HorizontalAlignment="Center" Spacing="5" Margin="0 5 0 0">
-                    <TextBlock HorizontalAlignment="Center" Text="Root Key" />
-
-                    <Components:LaunchpadGrid x:Name="RootKey" PadStarted="RootKeyStarted" PadPressed="RootKeyPressed" PadFinished="RootKeyFinished" />
                   
-                    <CheckBox HorizontalAlignment="Center" x:Name="Wrap" Click="Wrap_Changed">Wrap</CheckBox>
-                  </StackPanel>
+                  <Components:Dial Grid.Column="0" x:Name="Duration" Title="Duration" Minimum="1" Maximum="30000" Default="1000" Exponent="4.9209091868" Round="0" Scale="0.8" Unit="ms" DisabledText="Infinite" AllowSteps="true"
+                                  Started="Duration_Started" ValueChanged="Duration_Changed" StepChanged="Duration_StepChanged" ModeChanged="Duration_ModeChanged" />
+                  <Border BorderBrush="{DynamicResource ThemeBorderHighBrush}" BorderThickness="0 1 0 0">
+                    <StackPanel HorizontalAlignment="Center" Spacing="5" Margin="0 5 0 0">
+                      <TextBlock HorizontalAlignment="Center" Text="Root Key" />
 
+                      <Components:LaunchpadGrid x:Name="RootKey" PadStarted="RootKeyStarted" PadPressed="RootKeyPressed" PadFinished="RootKeyFinished" />
+
+                      <CheckBox HorizontalAlignment="Center" x:Name="Wrap" Click="Wrap_Changed">Wrap</CheckBox>
+                    </StackPanel>
+                  </Border>
+                  
                   <Border BorderBrush="{DynamicResource ThemeBorderHighBrush}" BorderThickness="0 1 0 0">
                     <Grid Margin="0 5 0 0" ColumnDefinitions="*,*">
                       <Components:Dial Grid.Column="0" x:Name="Repeats" Title="Repeats" Minimum="1" Maximum="128" Default="1" Exponent="2.0108883161" Scale="0.7" Unit="" DisabledText="1"
@@ -135,8 +140,6 @@
 
               <Border Grid.Row="3" BorderBrush="{DynamicResource ThemeBorderHighBrush}" BorderThickness="0 1 0 0">
                 <Grid Margin="7"  ColumnDefinitions="*,*">
-                  <Components:Dial Grid.Column="0" x:Name="Duration" Title="Duration" Minimum="1" Maximum="30000" Default="1000" Exponent="4.9209091868" Round="0" Scale="0.8" Unit="ms" DisabledText="Infinite" AllowSteps="true"
-                                   Started="Duration_Started" ValueChanged="Duration_Changed" StepChanged="Duration_StepChanged" ModeChanged="Duration_ModeChanged" />
                   
                   <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10 0" Spacing="5">
                     <Button Content="Reverse" x:Name="Reverse" Click="Frame_Reverse" />

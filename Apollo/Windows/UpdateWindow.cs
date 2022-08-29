@@ -156,7 +156,7 @@ namespace Apollo.Windows {
         
         public static void Create(Window owner) {
             UpdateWindow window = new UpdateWindow();
-                
+            Program.Log("spawning update window");
             if (owner == null || owner.WindowState == WindowState.Minimized) 
                 window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             else

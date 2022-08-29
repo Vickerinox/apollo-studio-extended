@@ -19,7 +19,8 @@ namespace Apollo.Core {
 
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
-                .UsePlatformDetect();
+                .UsePlatformDetect()
+                .LogToTrace();
 
         public static string GetBaseFolder(string folder) => Path.Combine(
             Directory.GetParent(

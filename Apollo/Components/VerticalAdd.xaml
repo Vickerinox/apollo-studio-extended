@@ -2,7 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Apollo.Components.VerticalAdd"
              xmlns:Components="clr-namespace:Apollo.Components"
-             DetachedFromVisualTree="Unloaded">
+             DetachedFromVisualTree="Unloaded"
+             MinHeight="5">
 
   <UserControl.Resources>
     <Components:ApolloContextMenu x:Key="PasteContextMenu" MenuAction="ContextMenu_Action">
@@ -21,7 +22,7 @@
     </Style>
     <Style Selector="Grid.collapsible[IsPointerOver=false]">
       <Style.Animations>
-        <Animation Duration="0:0:0.1" FillMode="Forward">
+        <Animation Duration="0:0:0.05" FillMode="Forward">
           <KeyFrame Cue="100%">
             <Setter Property="Height" Value="5" />
           </KeyFrame>
@@ -31,22 +32,22 @@
     <Style Selector="Grid.collapsible[IsPointerOver=true]">
       <Style.Animations>
         <Animation Duration="0:0:0.15" FillMode="Forward">
-          <KeyFrame Cue="33%">
+          <KeyFrame Cue="67%">
             <Setter Property="Height" Value="5" />
           </KeyFrame>
           <KeyFrame Cue="100%">
-            <Setter Property="Height" Value="26" />
+            <Setter Property="Height" Value="20" />
           </KeyFrame>
         </Animation>
       </Style.Animations>
     </Style>
   </UserControl.Styles>
 
-  <Grid RowDefinitions="7,Auto,7" Background="Transparent" Cursor="Hand" x:Name="Root" Classes="collapsible"
+  <Grid RowDefinitions="5,Auto,5" Background="Transparent" Cursor="Hand" x:Name="Root" Classes="collapsible"
         PointerEnter="MouseEnter" PointerLeave="MouseLeave" PointerPressed="MouseDown" PointerReleased="MouseUp">
-    <Canvas Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="12" Height="12" Background="Transparent" ClipToBounds="true" x:Name="Icon">
+    <Canvas Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="10" Height="10" Background="Transparent" ClipToBounds="true" x:Name="Icon">
       <Path StrokeThickness="2" x:Name="Path"
-            Data="M 0,6 L 12,6 M 6,0 L 6,12" />
+            Data="M 0,5 L 10,5 M 5,0 L 5,10" />
     </Canvas>
   </Grid>
 </UserControl>

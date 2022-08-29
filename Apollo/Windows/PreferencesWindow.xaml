@@ -30,19 +30,22 @@
         <ScrollViewer Grid.Row="0">
           <StackPanel Spacing="5" Margin="10 5">
             <StackPanel.Styles>
+              
               <Style Selector="StackPanel > Border">
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="Height" Value="2" />
                 <Setter Property="BorderThickness" Value="0 0 0 1" />
               </Style>
-
+              
               <Style Selector="TextBlock.heading">
                 <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
               </Style>
+              
             </StackPanel.Styles>
 
             <Grid ColumnDefinitions="*,Auto,*">
+              
               <Grid.Styles>
                 <Style Selector="ComboBox">
                   <Setter Property="BorderThickness" Value="0" />
@@ -50,13 +53,15 @@
                   <Setter Property="Background" Value="Transparent" />
                 </Style>
               </Grid.Styles>
-
+              
               <StackPanel Grid.Column="0" Spacing="5" VerticalAlignment="Center">
+                
                 <TextBlock Classes="heading" Text="Appearance" />
                 <CheckBox Click="AlwaysOnTop_Changed" x:Name="AlwaysOnTop">Always on Top</CheckBox>
                 <CheckBox Click="CenterTrackContents_Changed" x:Name="CenterTrackContents">Center Track Contents</CheckBox>
                 <CheckBox Click="ChainSignalIndicators_Changed" x:Name="ChainSignalIndicators">Chain Signal Indicators</CheckBox>
                 <CheckBox Click="DeviceSignalIndicators_Changed" x:Name="DeviceSignalIndicators">Device Signal Indicators</CheckBox>
+                
                 <StackPanel Orientation="Horizontal" Spacing="5">
                   <TextBlock VerticalAlignment="Center" Text="Color Display Format:" />
                   <ComboBox VerticalAlignment="Center" x:Name="ColorDisplayFormat" SelectionChanged="ColorDisplayFormat_Changed">
@@ -66,7 +71,7 @@
                 </StackPanel>
 
                 <Border />
-
+                
                 <Grid ColumnDefinitions="Auto,*">
                   <StackPanel Grid.Column="0" Spacing="5">
                     <TextBlock Classes="heading" Text="Theme" />
@@ -78,14 +83,18 @@
                 </Grid>
 
                 <Border />
-                
+              
                 <TextBlock Classes="heading" Text="Processing" />
+                
                 <StackPanel Background="Transparent">
+                  
                   <Components:HorizontalDial HorizontalAlignment="Left" x:Name="FPSLimit" Title="FPS Limit:" Minimum="10" Maximum="500" Default="150" Exponent="1.6" Round="0" Unit=" FPS" Scale="0.4" 
                                              ErrorValue="220" ValueChanged="FPSLimit_Changed"/>
+                  
                 </StackPanel>
+                
               </StackPanel>
-
+              
               <Border Grid.Column="1" BorderBrush="{DynamicResource ThemeBorderHighBrush}" Margin="10 0" VerticalAlignment="Stretch" Width="2" BorderThickness="0 0 1 0" />
 
               <StackPanel Grid.Column="2" Spacing="5" VerticalAlignment="Center">
@@ -115,6 +124,7 @@
 
                 <Components:LaunchpadGrid MaxWidth="192" x:Name="Preview" PadPressed="Preview_Pressed" />
               </StackPanel>
+              
             </Grid>
             
             <Border />

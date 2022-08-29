@@ -85,7 +85,7 @@ namespace Apollo.Components {
             set {
                 if (_errorvalue != value) {
                     _errorvalue = value;
-                    DrawArcAuto();
+                    //DrawArcAuto();
                 }
             }
         }
@@ -281,6 +281,7 @@ namespace Apollo.Components {
 
         protected string ValueString => _usingSteps? _length.ToString() : $"{((_centered && RawValue > 0)? "+" : "")}{RawValue}{Unit}";
 
+        //Draws Dial, arc is what arc, value is ranged from 0.0 to 1.0, and overridebase/color is kinda wierd idk.
         protected virtual void DrawArc(Path Arc, double value, bool overrideBase, string color = "ThemeAccentBrush") {
             if (Parent is Control control) ToolTip.SetIsOpen(control, false);
 
@@ -304,30 +305,35 @@ namespace Apollo.Components {
                 angle = 18;
             }
 
+            //math coordinate shenanigans
             double x_start = (radius * (Math.Cos(angle_starting) + 1) + strokeHalf) * _scale;
             double y_start = (radius * (-Math.Sin(angle_starting) + 1) + strokeHalf) * _scale;
-
             double x_end = (radius * (Math.Cos(angle_point) + 1) + strokeHalf) * _scale;
             double y_end = (radius * (-Math.Sin(angle_point) + 1) + strokeHalf) * _scale;
 
-            int large = Convert.ToInt32(angle > 180);
-            int direction = Convert.ToInt32(angle > 0);
+            //converts whats supposed to be flags/booleans into integers for the sake of the final string parse
+            int large = Convert.ToInt32(angle > 180);       //large flags for below/above 180 degrees of curve
+            int direction = Convert.ToInt32(angle > 0);     //direction flag for left/right curve
 
-            Arc.StrokeThickness = stroke * _scale;
+            Arc.StrokeThickness = stroke * _scale;  //scale thickness of arc by scale as you should
             if (!overrideBase) {
                 Arc.Stroke = (IBrush)Application.Current.FindResource(Enabled? color : "ThemeForegroundLowBrush");
                 Display.Text = (Enabled || !DisplayDisabledText)? ValueString : DisabledText;
             }
-            
+
+            //generates the geometry of all dials, crashes apollo as of now.
             Arc.Data = Geometry.Parse(String.Format("M {0},{1} A {2},{2} {3} {4} {5} {6},{7}",
-                x_start.ToString(),
-                y_start.ToString(),
-                (radius * _scale).ToString(),
-                angle.ToString(),
-                large,
-                direction,
-                x_end.ToString(),
-                y_end.ToString()
+                x_start.ToString(), //starting x location
+                y_start.ToString(), //starting y location
+
+                (radius * _scale).ToString(), //radius of dial (as its an eliptical curve used twice)
+        
+                angle.ToString(), //angle in degrees? curvature? idk
+                large,            //large flag (0 = <180deg, 1 = >180deg)
+                direction,        //direction flag (left, right)
+
+                x_end.ToString(), //x "endpoint"?
+                y_end.ToString()  //y "endpoint"?
             ));
         }
 
@@ -372,8 +378,9 @@ namespace Apollo.Components {
 
             observable.Dispose();
         }
-
-        protected void LayoutChanged(object sender, EventArgs e) => DrawArcAuto();
+        
+        //old function that caused crashes, dont know what it does or why it does that but it crashed apollo.
+        //protected void LayoutChanged(object sender, EventArgs e) => DrawArcAuto();
 
         bool mouseHeld = false;
         double oldValue;
